@@ -1,4 +1,3 @@
-package ex01;
 
 public class Word {
     public String body;

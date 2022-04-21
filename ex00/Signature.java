@@ -1,5 +1,3 @@
-package ex00;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
