@@ -20,9 +20,9 @@ public class SignatureChecker {
                 } else {
                     signatureBuffer = new char[Signature.MAX_SIGNATURE_SIZE];
                 }
-            }
-            for (int counter = 0; counter < signatureBuffer.length; ++counter) {
-                signatureBuffer[counter] = (char)inputStream.read();
+                for (int counter = 0; counter < signatureBuffer.length; ++counter) {
+                    signatureBuffer[counter] = (char)inputStream.read();
+                }
             }
         } catch (java.io.IOException ioException) {
             throw new RuntimeException();

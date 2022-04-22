@@ -1,3 +1,4 @@
+import javax.imageio.IIOException;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,8 +26,9 @@ public class Menu {
     }
 
     private void mvCommand(String fromPath, String toPath) throws WrongPath {
-        Path from = Paths.get(fromPath);
-        Path to = Paths.get(toPath);
+        Path current = Paths.get(this.directory);
+        Path from = current.resolve(Paths.get(fromPath));
+        Path to = current.resolve(Paths.get(toPath));
         if (!Files.exists(from) || Files.isDirectory(from)) {
             throw new WrongPath();
         }
@@ -52,11 +54,12 @@ public class Menu {
     }
 
     private void cdCommand(String directory) throws WrongPath {
-        Path destination = Paths.get(directory);
+        Path current = Paths.get(this.directory);
+        Path destination = current.resolve(Paths.get(directory));
         if (!Files.exists(destination.toAbsolutePath()) || !Files.isDirectory(destination)) {
             throw new WrongPath();
         } else {
-            this.directory = destination.toAbsolutePath().toString();
+                this.directory = destination.toAbsolutePath().toString();
         }
     }
     public void startMenu() {
