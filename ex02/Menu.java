@@ -46,10 +46,10 @@ public class Menu {
         }
     }
     private void lsCommand() {
-        File file = new File(directory);
-        String[] fileList = file.list();
-        for(String str : fileList) {
-            System.out.println(str);
+        File currendDirctory = new File(directory);
+        File[] directoryFiles = currendDirctory.listFiles();
+        for(File file : directoryFiles) {
+            System.out.println(file.getName() + " " + getFileSize(file) / 1024 + " KB");
         }
     }
 
@@ -92,5 +92,17 @@ public class Menu {
             currLine = console.nextLine();
         }
         System.exit(-1);
+    }
+
+    private static long getFileSize(File file) {
+        if (file.isFile()) {
+            return file.length();
+        }
+        long fileSize = 0;
+        File[] directoryFiles = file.listFiles();
+        for(File currentFile : directoryFiles) {
+            fileSize += getFileSize(currentFile);
+        }
+        return fileSize;
     }
 }
